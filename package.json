@@ -6,6 +6,9 @@
   "dependencies": {
     "node-telegram-bot-api": "^0.40.0"
   },
+  "engines": {
+    "node": "13.11"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
