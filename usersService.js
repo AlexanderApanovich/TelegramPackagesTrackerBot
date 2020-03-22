@@ -41,6 +41,6 @@ function removeUser(user) {
 
 module.exports = {
     getUsers: getUsers,
-    add: addUser,
+    addUser: addUser,
     removeUser: removeUser
 }
