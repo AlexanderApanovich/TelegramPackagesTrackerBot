@@ -14,19 +14,19 @@
     })
 
 
-    // setInterval(async () => {
-    // let users = usersService.getUsers();
-    // }, 300000);
+    setInterval(async () => {
 
+        let users = usersService.getUsers();
+    }, 5000);
 
     function sendInfo(user) {
         parseService.parse().then(function (value) {
 
             // users.forEach(user => {
-                let message = getMessage(value);
+            let message = getMessage(value);
 
-                bot.sendMessage(user, message);
-            })
+            bot.sendMessage(user, message);
+        })
         // }, function (reason) { });
     }
 
