@@ -7,15 +7,26 @@
     var bot = new TelegramBot(token, { polling: true });
     var me = 725757794;
 
-    initBot();
+    bot.onText(/start/, function (msg) {
+        let user = msg.from.id;
+        usersService.addUser(user);
+    })
+
+    bot.onText(/quit/, function (msg) {
+        let user = msg.from.id;
+        usersService.removeUser(user);
+    })
+
+    bot.onText(/info/, function (msg) {
+        let user = msg.from.id;
+        sendInfo(user);
+    })
 
     process.on('uncaughtException', function (err) {
         bot.sendMessage(me, err.message);
     })
 
-
-    setInterval(async () => {
-
+    setInterval(() => {
         let users = usersService.getUsers();
     }, 5000);
 
@@ -48,22 +59,5 @@
         }
 
         return message;
-    }
-
-    function initBot() {
-        bot.onText(/start/, function (msg) {
-            let user = msg.from.id;
-            usersService.addUser(user);
-        })
-
-        bot.onText(/quit/, function (msg) {
-            let user = msg.from.id;
-            usersService.removeUser(user);
-        })
-
-        bot.onText(/info/, function (msg) {
-            let user = msg.from.id;
-            sendInfo(user);
-        })
-    }
+    }    
 })();
