@@ -48,7 +48,7 @@ function parseBody(body) {
     return statuses;
 }
 
-async function parse() {
+async function getPackagesInfo() {
     return new Promise(async (resolve, reject) => {
 
         var packagesInfo = [];
@@ -61,7 +61,7 @@ async function parse() {
                 });
 
             var statuses = parseBody(body);
-            
+
             packagesInfo.push(
                 {
                     url: element.url,
@@ -80,6 +80,22 @@ async function parse() {
     });
 }
 
+async function getMessage() {
+    let message = "";
+    let packages = await getPackagesInfo();
+
+    for (let i = 0; i < packages.length; i++) {
+        let package = packages[i];
+
+        let packageMessage = `Посылка "${package.name}": \nпоследний трекинг ${package.statuses[0].date
+            .toLocaleDateString('ru-RU')}\n${package.statuses[0].text}\n===============================\n`;
+
+        message = message + packageMessage;
+    }
+
+    return message;
+}
+
 module.exports = {
-    parse: parse
+    getMessage: getMessage
 }
